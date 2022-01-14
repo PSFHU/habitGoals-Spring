@@ -1,4 +1,4 @@
-CREATE ROLE habit_thymeleaf_web WITH
+CREATE ROLE habit_goals_web WITH
     LOGIN
     SUPERUSER
     CREATEDB
