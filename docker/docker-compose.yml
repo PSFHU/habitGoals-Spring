@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  habitgoal-web:
+    container_name: 'habitgoals-web'
+    image: habitgoals
+    ports:
+      - 8081:8081
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: 'habitGoals-postgres'
+    environment:
+      - POSTGRES_PASSWORD=Password111
+    volumes:
+      - ./postgres/initdb:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
