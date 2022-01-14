@@ -23,7 +23,7 @@ CREATE TABLE user_role
 CREATE TABLE goal_category
 (
     id                  serial PRIMARY KEY,
-    title               varchar(255) NOT NULL
+    name               varchar(255) NOT NULL
 );
 
 CREATE TABLE goal

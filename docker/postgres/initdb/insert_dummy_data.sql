@@ -26,7 +26,7 @@ FROM (SELECT u.id FROM "user" u WHERE u.username = 'user') a,
 
 -- Aimlab goals
 -- Create a goal_category
-insert into goal_category (id, title)
+insert into goal_category (id, name)
 values (1, 'Aimlab Professional');
 
 -- Setup our goals
@@ -102,7 +102,7 @@ values (10,10,3);
 
 -- Workout goals
 -- Create a goal_category
-insert into goal_category (id, title)
+insert into goal_category (id, name)
 values (21, 'Summer body by Saitama');
 
 -- Setup our goals
