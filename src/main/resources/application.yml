@@ -1,0 +1,9 @@
+server:
+  port:8091
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?schema=public
+    username: habit_goals_web
+    password: 12345678
+    driver-class-name: org.postgresql.Driver
