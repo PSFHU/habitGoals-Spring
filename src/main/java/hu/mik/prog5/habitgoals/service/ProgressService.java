@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProgressService implements CRUDService<Progress>{
-    private ProgressRepository progressRepository;
+    private final ProgressRepository progressRepository;
 
     @Override
     public List findAll() {
