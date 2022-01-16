@@ -17,8 +17,7 @@ public class Goal {
     @Column(name = "goal_value")
     private Double value;
     @Column(name = "goal_logic")
-    @Enumerated(EnumType.STRING)
-    private GoalLogic goalLogic = GoalLogic.EQUAL;
+    private String goalLogic;
 
     @ManyToOne
     private GoalCategory goalCategory;

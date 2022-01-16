@@ -1,5 +1,6 @@
 package hu.mik.prog5.habitgoals.entity.user;
 
+import hu.mik.prog5.habitgoals.entity.Stat;
 import hu.mik.prog5.habitgoals.entity.user.Role;
 import lombok.Data;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
