@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Mentés</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<div id="saveForm">
+    <div>
+        <label for="unitName">Name:</label>
+        <input id="unitName" type="text" v-model="unit.name"/>
+    </div>
+    <div>
+        <button id="save" v-on:click="save">Mentés</button>
+        <button id="back" v-on:click="back">Vissza</button>
+    </div>
+</div>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                unit: {}
+            }
+        },
+        methods: {
+            save() {
+                fetch('/api/unit', {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(this.unit)
+                }).then(res => {
+                    if (res.ok) {
+                        window.location = "/list"
+                    } else {
+                        throw new Error(res.error);
+                    }
+                });
+            },
+            back() {
+                history.back();
+            },
+            empty() {
+                this.unit.name = null;
+            }
+        },
+        mounted() {
+            const id = new URLSearchParams(window.location.search).get('id');
+            if (id != null) {
+                fetch('/api/unit/' + id, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                }).then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw new Error(res.error);
+                    }
+                }).then(out => this.unit = out);
+            }
+        }
+    }).mount('#save')
+</script>
+</body>
+</html>
