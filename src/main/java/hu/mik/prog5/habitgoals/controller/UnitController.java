@@ -3,13 +3,14 @@ package hu.mik.prog5.habitgoals.controller;
 import hu.mik.prog5.habitgoals.entity.Unit;
 import hu.mik.prog5.habitgoals.service.UnitService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@Slf4j
+@RestController
 @RequestMapping("/api/unit")
 @RequiredArgsConstructor
 public class UnitController implements CRUDController<Unit>{
@@ -23,7 +24,8 @@ public class UnitController implements CRUDController<Unit>{
     }
 
     @Override
-    public Unit findById(Long id) {
+    @GetMapping("/{id}")
+    public Unit findById(@PathVariable Long id) {
         return this.unitService.findById(id);
     }
 
