@@ -17,15 +17,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //@formatter:off
         http.authorizeRequests()
-                .antMatchers(AUTH_WHITELIST).permitAll()
-                .anyRequest().authenticated()
-                .and()
+                    .antMatchers(AUTH_WHITELIST).permitAll()
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/subscribe").permitAll()
-                .and()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/list").permitAll()
+                    .and()
                 .logout()
-                .permitAll();
+                    .permitAll();
         //@formatter:on
     }
 

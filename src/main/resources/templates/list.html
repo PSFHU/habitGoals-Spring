@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Listázás</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<div id="list">
+    <table>
+        <tr>
+            <th>Azonosító</th>
+            <th>Név</th>
+        </tr>
+        <tr v-for="unit in unitList">
+            <td>{{unit.id}}</td>
+            <td>{{unit.name}}</td>
+            <td>
+                <button v-on:click="delete(unit)">Törlés</button>
+                <button v-on:click="edit(unit.id)">Szerkesztés</button>
+            </td>
+        </tr>
+    </table>
+    <button v-on:click="newUnit">Új</button>
+    <span>Összesen: {{sum}}db</span>
+</div>
+<script>
+    Vue.createApp({
+        data() {
+            return {unitList: []};
+        },
+        computed: {
+            sum: function () {
+                return this.unitList.length;
+            }
+        },
+        methods: {
+            delete(unit) {
+                if (window.confirm('Biztos szeretné törölni ' + unit.name + '?\n(id: ' + unit.id + ')')) {
+                    fetch('http://localhost:8081/api/unit' + unit.id, {
+                        method: 'DELETE',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        }
+                    }).then(res => {
+                        if (res.ok) {
+                            this.refreshList();
+                        } else {
+                            throw new Error(res.error);
+                        }
+                    });
+                }
+            },
+            edit(id) {
+                window.location = '/save?id=' + id;
+            },
+            newUnit() {
+                window.location = '/save';
+            },
+            refreshList() {
+                fetch('http://localhost:8081/api/unit', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                }).then(res => res.json())
+                    .then(out => this.unitList = out);
+            }
+        },
+        mounted() {
+            this.refreshList();
+        }
+    }).mount('#list');
+</script>
+</body>
+</html>
