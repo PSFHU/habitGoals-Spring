@@ -1,5 +1,5 @@
 -- User data
-CREATE TABLE "user"
+CREATE TABLE users
 (
     id                  SERIAL      PRIMARY KEY,
     username            VARCHAR(255) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE role
 CREATE TABLE user_role
 (
     id                  SERIAL      PRIMARY KEY,
-    user_id             SERIAL      NOT NULL REFERENCES "user" (id),
+    user_id             SERIAL      NOT NULL REFERENCES users (id),
     role_id             SERIAL      NOT NULL REFERENCES role (id)
 );
 
@@ -52,7 +52,7 @@ CREATE TABLE progress
 CREATE TABLE stat
 (
     id                  serial      PRIMARY KEY,
-    user_id             serial      NOT NULL REFERENCES "user" (id),
+    user_id             serial      NOT NULL REFERENCES users (id),
     goal_id             serial      REFERENCES goal (id),
     unit_type_id        serial      NOT NULL REFERENCES unit_type (id)
 );

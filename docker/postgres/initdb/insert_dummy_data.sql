@@ -1,9 +1,9 @@
 -- Adding default users
 -- Admin
-insert into "user" (username, password)
+insert into users (username, password)
 values ('admin', '$2a$10$prNhwDKXkPAzTHfHtShojeofzSswq1lsQHkNYG3ZeFIYlZi50P5B2');
 -- User (Basic)
-insert into "user" (username, password)
+insert into users (username, password)
 values ('user', '$2a$10$prNhwDKXkPAzTHfHtShojeofzSswq1lsQHkNYG3ZeFIYlZi50P5B2');
 -- Adding roles
 INSERT INTO role (role_name)
@@ -13,15 +13,15 @@ VALUES ('ADMIN');
 
 INSERT INTO user_role (user_id, role_id)
 SELECT *
-FROM (SELECT u.id FROM "user" u WHERE u.username = 'admin') a,
+FROM (SELECT u.id FROM users u WHERE u.username = 'admin') a,
      (SELECT r.id FROM "role" r WHERE r.role_name = 'ADMIN') b;
 INSERT INTO user_role (user_id, role_id)
 SELECT *
-FROM (SELECT u.id FROM "user" u WHERE u.username = 'admin') a,
+FROM (SELECT u.id FROM users u WHERE u.username = 'admin') a,
      (SELECT r.id FROM "role" r WHERE r.role_name = 'USER') b;
 INSERT INTO user_role (user_id, role_id)
 SELECT *
-FROM (SELECT u.id FROM "user" u WHERE u.username = 'user') a,
+FROM (SELECT u.id FROM users u WHERE u.username = 'user') a,
      (SELECT r.id FROM "role" r WHERE r.role_name = 'USER') b;
 
 -- Aimlab goals
@@ -47,11 +47,11 @@ values (3, 'Microshot');
 
 -- Create stats
 insert into stat(id, user_id, goal_id, unit_type_id)
-VALUES (1,(SELECT u.id FROM "user" u WHERE u.username = 'user'),1,1);
+VALUES (1,(SELECT u.id FROM users u WHERE u.username = 'user'),1,1);
 insert into stat(id, user_id, goal_id, unit_type_id)
-VALUES (2,(SELECT u.id FROM "user" u WHERE u.username = 'user'),2,2);
+VALUES (2,(SELECT u.id FROM users u WHERE u.username = 'user'),2,2);
 insert into stat(id, user_id, goal_id, unit_type_id)
-VALUES (3,(SELECT u.id FROM "user" u WHERE u.username = 'user'),3,3);
+VALUES (3,(SELECT u.id FROM users u WHERE u.username = 'user'),3,3);
 
 -- Give in some progress
 insert into progress(id, value, timestamp)
@@ -126,13 +126,13 @@ insert into unit_type (id, name)
 values (7, 'Running(km)');
 
 insert into stat(id, user_id, goal_id, unit_type_id)
-values (4,(SELECT u.id FROM "user" u WHERE u.username = 'user'),4,4);
+values (4,(SELECT u.id FROM users u WHERE u.username = 'user'),4,4);
 insert into stat(id, user_id, goal_id, unit_type_id)
-values (5,(SELECT u.id FROM "user" u WHERE u.username = 'user'),5,5);
+values (5,(SELECT u.id FROM users u WHERE u.username = 'user'),5,5);
 insert into stat(id, user_id, goal_id, unit_type_id)
-values (6,(SELECT u.id FROM "user" u WHERE u.username = 'user'),6,6);
+values (6,(SELECT u.id FROM users u WHERE u.username = 'user'),6,6);
 insert into stat(id, user_id, goal_id, unit_type_id)
-values (7,(SELECT u.id FROM "user" u WHERE u.username = 'user'),7,7);
+values (7,(SELECT u.id FROM users u WHERE u.username = 'user'),7,7);
 
 -- Give in some progress
 insert into progress(id, value, timestamp)
