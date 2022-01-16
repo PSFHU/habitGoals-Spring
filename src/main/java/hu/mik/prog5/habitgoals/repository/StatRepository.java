@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface StatRepository extends JpaRepository<Stat,Long> {
 
-    List<Progress> getLastDays(int days);
+//    List<Progress> getLastDays(int days);
 }
